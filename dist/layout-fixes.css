@@ -1,4 +1,16 @@
 /* Keep the booking content within the viewport at every screen size. */
+.wrap.section { padding-inline: clamp(20px, 3vw, 42px); }
+.hero-inner, .story, .grid, .gallery { min-width: 0; }
+.hero-inner > *, .story > *, .grid > *, .gallery > * { min-width: 0; }
+.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.section-head > div { min-width: 0; }
+.section-head h2, .card h3, .card p, footer a { overflow-wrap: anywhere; }
+img { max-width: 100%; }
+dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+dialog .btn { max-width: 100%; white-space: normal; }
+#confirmation .dialog-head h3 { margin-right: 14px; }
+#confirmation .close { flex-shrink: 0; }
+#dashboard .card, #dashboard .meta { overflow-wrap: anywhere; }
 #visit {
   width: 100%;
   max-width: 1240px;
@@ -17,6 +29,29 @@
 #visit > .reveal { opacity: 1; transform: none; }
 @media (max-width: 960px) {
   #visit { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 800px) {
+  .story { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .story-img img { height: 360px; }
+}
+@media (max-width: 600px) {
+  header nav { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; height: auto; min-height: 78px; padding-block: 18px; gap: 14px; }
+  header nav > .logo { grid-column: 1; grid-row: 1; }
+  header nav > .menu-toggle { grid-column: 2; grid-row: 1; }
+  header nav > .btn { grid-column: 1 / -1; grid-row: 2; padding: 12px 18px; }
+  header nav .links { top: 100%; left: -20px; right: -20px; flex-wrap: wrap; }
+  .hero h1 { font-size: clamp(40px, 10vw, 53px); letter-spacing: -2px; }
+  .hero-bottom { flex-wrap: wrap; row-gap: 12px; }
+  .section-head { flex-wrap: wrap; gap: 15px; }
+  .gallery figure:nth-child(odd):last-child { grid-column: 1 / -1; }
+  .values { flex-wrap: wrap; }
+  .footer-top .links, .footer-bottom { flex-wrap: wrap; }
+  dialog { padding: 22px; }
+}
+@media (max-width: 360px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .photo img { height: 230px; }
 }
 @media (max-width: 480px) {
   #booking { padding: 22px 18px; }

@@ -1,0 +1,26 @@
+/* Keep the booking content within the viewport at every screen size. */
+#visit {
+  width: 100%;
+  max-width: 1240px;
+  padding-inline: clamp(20px, 3vw, 42px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(28px, 4vw, 65px);
+}
+#visit > *, #booking .form-grid > * { min-width: 0; }
+#booking { width: 100%; max-width: 100%; margin: 0; }
+#booking .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#booking input, #booking select { min-width: 0; max-width: 100%; }
+#visit p, #visit a, #booking label { overflow-wrap: anywhere; }
+#visit .visit-photo { display: block; max-width: 100%; }
+/* Essential booking controls must never depend on a scroll animation. */
+#visit > .reveal { opacity: 1; transform: none; }
+@media (max-width: 960px) {
+  #visit { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 480px) {
+  #booking { padding: 22px 18px; }
+  #booking .form-grid { grid-template-columns: minmax(0, 1fr); }
+  #booking .full { grid-column: auto; }
+  #booking > .btn { max-width: 100%; white-space: normal; }
+}

@@ -4,3 +4,9 @@
 node_modules/
 .openai/
 *.tar.gz
+supabase-*.sql
+*.pem
+*.key
+*.p12
+*.pfx
+*.log

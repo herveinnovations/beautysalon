@@ -28,8 +28,16 @@ module.exports=async function(req,res){
   const rows=[['Treatment',a.service_name],['Date',date],['Time',time+' (Zambia time)'],['Duration',a.duration_minutes+' min'],['Price','K'+Number(a.price_zmw).toLocaleString('en-ZM')],['Name',a.customer_name],['Phone',a.phone],['Email',a.email],['May contact by phone/WhatsApp',a.followup_consent?'Yes':'No']];
   const html=`<div style="font-family:Arial,sans-serif;max-width:520px;color:#34212c"><h2 style="margin:0 0 6px">New booking request</h2><p style="margin:0 0 18px;color:#85737c">Pending: reply to the customer to confirm.</p><table style="border-collapse:collapse;width:100%;font-size:14px">${rows.map(([k,v])=>`<tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#85737c;width:45%">${esc(k)}</td><td style="padding:8px 0;border-bottom:1px solid #eee"><b>${esc(v)}</b></td></tr>`).join('')}</table><p style="margin:22px 0"><a href="${esc(wa)}" style="background:#236c51;color:#fff;padding:12px 20px;border-radius:24px;text-decoration:none;font-weight:bold">Reply on WhatsApp</a></p><p style="font-size:13px"><a href="https://glowbloom.vercel.app/admin.html" style="color:#723a50">Open studio admin</a></p><p style="font-size:11px;color:#a08f97">Reference ${esc(a.id)}</p></div>`;
   const text=rows.map(([k,v])=>`${k}: ${v}`).join('\n')+`\n\nReply on WhatsApp: ${wa}\nAdmin: https://glowbloom.vercel.app/admin.html\nReference: ${a.id}`;
-  const sent=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'booking-'+a.id},body:JSON.stringify({from:process.env.NOTIFY_FROM||'Glow Bloom <onboarding@resend.dev>',to:[process.env.NOTIFY_EMAIL||'hervecreativeagency@gmail.com'],reply_to:a.email||undefined,subject:`New booking: ${a.service_name}, ${date} ${time} (${a.customer_name})`,html,text}),signal:AbortSignal.timeout(10000)});
-  if(!sent.ok){console.error('notify: resend',sent.status,(await sent.text()).slice(0,300));return res.status(502).json({error:'Email failed'})}
-  return res.status(200).json({ok:true});
+  // Recipients: everyone on the admin "Team & alerts" list with alerts on. Falls back to NOTIFY_EMAIL.
+  let to=[];
+  try{const rr=await fetch(`${SUPABASE}/rest/v1/rpc/bloom_alert_recipients`,{method:'POST',headers:{...headers,'Content-Type':'application/json'},body:'{}',signal:AbortSignal.timeout(8000)});if(rr.ok)to=(await rr.json()).map(x=>x.email).filter(Boolean)}catch{}
+  if(!to.length)to=[process.env.NOTIFY_EMAIL||'hervecreativeagency@gmail.com'];
+  // Send one email per person so one rejected address does not block the others.
+  let delivered=0;
+  for(const email of to.slice(0,10)){
+   const sent=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'booking-'+a.id+'-'+email},body:JSON.stringify({from:process.env.NOTIFY_FROM||'Glow Bloom <onboarding@resend.dev>',to:[email],reply_to:a.email||undefined,subject:`New booking: ${a.service_name}, ${date} ${time} (${a.customer_name})`,html,text}),signal:AbortSignal.timeout(10000)});
+   if(sent.ok)delivered++;else console.error('notify: resend',email,sent.status,(await sent.text()).slice(0,300));
+  }
+  return delivered?res.status(200).json({ok:true,delivered}):res.status(502).json({error:'Email failed'});
  }catch(e){console.error('notify:',e.message);return res.status(503).json({error:'Notification unavailable'})}
 };

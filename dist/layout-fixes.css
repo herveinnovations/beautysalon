@@ -59,3 +59,19 @@ dialog .btn { max-width: 100%; white-space: normal; }
   #booking .full { grid-column: auto; }
   #booking > .btn { max-width: 100%; white-space: normal; }
 }
+
+/* Lash reels gallery: swipeable vertical videos */
+#looks .section-head{align-items:end}
+.reel-nav{display:flex;gap:8px}
+.reel-nav button{width:42px;height:42px;border-radius:50%;border:1px solid #dfcdd2;background:#fff;color:#723a50;font-size:18px;cursor:pointer;transition:.2s}
+.reel-nav button:hover{background:#723a50;color:#fff}
+#looks .gallery{display:flex !important;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 16px;scrollbar-width:thin;scrollbar-color:#dfcdd2 transparent;-webkit-overflow-scrolling:touch}
+#looks .gallery figure{flex:0 0 clamp(210px,23vw,268px);height:auto !important;aspect-ratio:9/16;margin:0;position:relative;overflow:hidden;border-radius:140px 140px 16px 16px;background:#34212c;scroll-snap-align:start;cursor:pointer;box-shadow:0 14px 30px #34212c1f}
+#looks .gallery figure video,#looks .gallery figure img{width:100%;height:100%;object-fit:cover;display:block}
+#looks .gallery figcaption{font-size:16px !important;padding:60px 18px 20px !important;pointer-events:none}
+#looks .gallery .reel-play{position:absolute;z-index:2;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:rgba(255,250,247,.92);color:#723a50;display:flex;align-items:center;justify-content:center;padding-left:4px;box-sizing:border-box;font-size:18px;box-shadow:0 6px 18px rgba(52,33,44,.25);opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s;pointer-events:none}
+#looks .gallery .reel.paused .reel-play{opacity:1;transform:scale(1)}
+#looks .gallery figcaption{z-index:1}
+@media (max-width:650px){#looks .gallery figure{flex-basis:64vw}.reel-nav{display:none}}
+/* Treatment card photos: keep the lashes in frame */
+.photo img{object-position:center 45%}

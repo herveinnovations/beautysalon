@@ -44,6 +44,9 @@
   $('#booking').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
   const f=$('#booking');f.classList.remove('flash');void f.offsetWidth;f.classList.add('flash')}
 
+ // Shows which treatment the customer chose from the menu, above the board.
+ function showPicked(){const s=services[$('#service').value],el=$('#avail-picked');if(!s||!el)return;el.replaceChildren();const b=document.createElement('b');b.textContent=s.name;el.append('Booking ',b,' · '+money(s.price)+'. Now pick a free time below.');el.hidden=false}
+ window.bloomShowPicked=showPicked;
  // Booking form: only the studio's fixed start times; taken or past ones are disabled.
  function fixedTimes(){const date=$('#date').value,sel=$('#time'),old=sel.value;sel.replaceChildren();
   if(!date){sel.add(new Option('Choose a date first',''));sel.options[0].disabled=true;return}
@@ -58,6 +61,7 @@
   $('#date').addEventListener('change',()=>{chosen=null;render()});$('#time').addEventListener('change',()=>{chosen=$('#date').value+' '+$('#time').value;render()});
   $('#confirmation')?.addEventListener('close',async()=>{chosen=null;await loadTaken();render();fixedTimes()});
   window.addEventListener('bloom:slots-changed',async()=>{await loadTaken();render();fixedTimes()});
+  $('#service').addEventListener('change',()=>{if(!$('#avail-picked').hidden)showPicked();chosen=null;render()});
   render();await loadTaken();render();fixedTimes()}
  if(window.bloomHours)start();else window.addEventListener('bloom:ready',start,{once:true});
 })();

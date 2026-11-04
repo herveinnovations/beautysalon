@@ -26,7 +26,7 @@ module.exports=async function(req,res){
   // Links follow whatever address the site is served from, so a domain rename needs no code change.
   const site='https://'+String(req.headers['x-forwarded-host']||req.headers.host||'mwiluxestudio.vercel.app').split(',')[0].trim();
   const phone=String(a.phone||'').replace(/[^\d+]/g,'');
-  const wa='https://wa.me/'+phone.replace(/^\+/,'')+'?text='+encodeURIComponent(`Hello ${a.customer_name}, thank you for your Glow Bloom request for ${a.service_name} on ${date} at ${time}. `);
+  const wa='https://wa.me/'+phone.replace(/^\+/,'')+'?text='+encodeURIComponent(`Hello ${a.customer_name}, thank you for your Mwiluxe Studio request for ${a.service_name} on ${date} at ${time}. `);
   const rows=[['Treatment',a.service_name],['Date',date],['Time',time+' (Zambia time)'],['Duration',a.duration_minutes+' min'],['Price','K'+Number(a.price_zmw).toLocaleString('en-ZM')],['Name',a.customer_name],['Phone',a.phone],['Email',a.email],['May contact by phone/WhatsApp',a.followup_consent?'Yes':'No']];
   const html=`<div style="font-family:Arial,sans-serif;max-width:520px;color:#34212c"><h2 style="margin:0 0 6px">New booking request</h2><p style="margin:0 0 18px;color:#85737c">Pending: reply to the customer to confirm.</p><table style="border-collapse:collapse;width:100%;font-size:14px">${rows.map(([k,v])=>`<tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#85737c;width:45%">${esc(k)}</td><td style="padding:8px 0;border-bottom:1px solid #eee"><b>${esc(v)}</b></td></tr>`).join('')}</table><p style="margin:22px 0"><a href="${esc(wa)}" style="background:#236c51;color:#fff;padding:12px 20px;border-radius:24px;text-decoration:none;font-weight:bold">Reply on WhatsApp</a></p><p style="font-size:13px"><a href="${esc(site)}/admin.html" style="color:#723a50">Open studio admin</a></p><p style="font-size:11px;color:#a08f97">Reference ${esc(a.id)}</p></div>`;
   const text=rows.map(([k,v])=>`${k}: ${v}`).join('\n')+`\n\nReply on WhatsApp: ${wa}\nAdmin: ${site}/admin.html\nReference: ${a.id}`;
@@ -37,7 +37,7 @@ module.exports=async function(req,res){
   // Send one email per person so one rejected address does not block the others.
   let delivered=0;
   for(const email of to.slice(0,10)){
-   const sent=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'booking-'+a.id+'-'+email},body:JSON.stringify({from:process.env.NOTIFY_FROM||'Glow Bloom <onboarding@resend.dev>',to:[email],reply_to:a.email||undefined,subject:`New booking: ${a.service_name}, ${date} ${time} (${a.customer_name})`,html,text}),signal:AbortSignal.timeout(10000)});
+   const sent=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'booking-'+a.id+'-'+email},body:JSON.stringify({from:process.env.NOTIFY_FROM||'Mwiluxe Studio <onboarding@resend.dev>',to:[email],reply_to:a.email||undefined,subject:`New booking: ${a.service_name}, ${date} ${time} (${a.customer_name})`,html,text}),signal:AbortSignal.timeout(10000)});
    if(sent.ok)delivered++;else console.error('notify: resend',email,sent.status,(await sent.text()).slice(0,300));
   }
   return delivered?res.status(200).json({ok:true,delivered}):res.status(502).json({error:'Email failed'});

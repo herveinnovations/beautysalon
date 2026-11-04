@@ -101,3 +101,7 @@ dialog .btn { max-width: 100%; white-space: normal; }
 @media (max-width:700px){.avail-foot{font-size:13px;letter-spacing:1.5px}.slot-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.day-head b{font-size:16px;letter-spacing:2px}.slot{font-size:17px;letter-spacing:1px;padding:7px 2px}.week-toggle button{padding:8px 12px;font-size:15px;letter-spacing:2px}}
 .avail-picked{display:inline-block;margin:14px auto 0;background:#fff;border:1px solid #e3cfd6;border-radius:30px;padding:10px 18px;font-size:13px;color:#723a50}
 .avail-picked b{color:#34212c}
+
+/* Editable photos wait for the published content, so an old photo never flashes on refresh */
+.hero-image img,.story-img img,.visit-photo,#looks .gallery{transition:opacity .35s ease}
+.content-loading .hero-image img,.content-loading .story-img img,.content-loading .visit-photo,.content-loading #looks .gallery{opacity:0}

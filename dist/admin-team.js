@@ -9,7 +9,7 @@
 <div id="team-list" class="cards"></div>
 <p class="notice"><b>Email delivery note:</b> booking emails are sent through Resend. Until a domain (e.g. yourstudio.co.zm) is verified in Resend, Resend only delivers to the email address that owns the Resend account. To email other people, verify a domain in Resend, or have the new owner create their own Resend account and replace <code>RESEND_API_KEY</code> in Vercel.</p>`;
  document.querySelector('#dashboard').append(panel);
- const ids=['appointments','treatments','content','analytics','team'];
+ const ids=['appointments','schedule','treatments','content','analytics','team'];
  document.querySelectorAll('[data-tab]').forEach(b=>{const prev=b.onclick;b.onclick=e=>{document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));ids.forEach(id=>{const el=document.getElementById(id);if(el)el.hidden=b.dataset.tab!==id});if(b.dataset.tab==='analytics'&&prev)prev.call(b,e);if(b===tab)load()}});
  const status=t=>document.getElementById('team-status').textContent=t;
  async function rpc(name,body){const access=await token();const r=await fetch(API+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+access,'Content-Type':'application/json'},body:JSON.stringify(body||{}),signal:AbortSignal.timeout(15000)});const data=r.status===204?null:await r.json().catch(()=>null);if(!r.ok)throw Error(data?.message||'Could not complete the request.');return data}

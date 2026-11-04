@@ -75,3 +75,27 @@ dialog .btn { max-width: 100%; white-space: normal; }
 @media (max-width:650px){#looks .gallery figure{flex-basis:64vw}.reel-nav{display:none}}
 /* Treatment card photos: keep the lashes in frame */
 .photo img{object-position:center 45%}
+
+/* Available appointments board (matches the studio's Instagram schedule) */
+.availability-section{background:#f3ece9}
+.avail-top{text-align:center;margin-bottom:26px}
+.avail-top p{margin:6px 0 0}
+.week-toggle{display:inline-flex;gap:6px;background:#e6dcd8;border-radius:12px;padding:5px}
+.week-toggle button{border:0;background:transparent;border-radius:9px;padding:10px 20px;font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#6d5a62;cursor:pointer}
+.week-toggle button[aria-pressed="true"]{background:#fff;color:#34212c;box-shadow:0 2px 8px #34212c14}
+.avail-title{font-family:'Pinyon Script',Georgia,serif;font-weight:400;font-size:clamp(46px,7vw,72px);letter-spacing:0;line-height:1.1;margin:14px 0 0;color:#2d2228}
+.slot-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:900px;margin:0 auto}
+.day-card{position:relative;background:#e8dfdb;border-radius:12px;padding:12px 12px 14px;overflow:hidden}
+.day-head{background:#fff;border-radius:6px;padding:10px 8px 7px;text-align:center;margin-bottom:8px}
+.day-head b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:#2d2228}
+.day-head span{display:block;font-size:11px;letter-spacing:1px;color:#8b7680;margin-top:1px}
+.day-slots{display:grid;gap:2px}
+.slot{border:0;background:transparent;border-radius:8px;padding:8px 6px;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:2px;color:#2d2228;cursor:pointer;transition:background .2s,color .2s}
+.slot.free:hover,.slot.free:focus-visible,.slot.selected{background:#723a50;color:#fff}
+.slot.taken{color:#a3949a;text-decoration:line-through;text-decoration-color:#9d3c8a;text-decoration-thickness:2px;cursor:not-allowed}
+.slot.past{color:#b9adb1;cursor:default}
+.day-card.crossed::after{content:'';position:absolute;inset:10px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M8 6 L92 94 M92 8 L8 92' stroke='%23a13fc0' stroke-width='5' stroke-linecap='round' fill='none' opacity='.85'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.avail-foot{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;letter-spacing:3px;color:#8b7680;margin-top:22px}
+#booking.flash{animation:bookflash 1.4s ease}
+@keyframes bookflash{0%{box-shadow:0 0 0 0 #723a5066}40%{box-shadow:0 0 0 10px #723a5022}100%{box-shadow:0 0 0 0 #723a5000}}
+@media (max-width:700px){.avail-foot{font-size:13px;letter-spacing:1.5px}.slot-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.day-head b{font-size:16px;letter-spacing:2px}.slot{font-size:17px;letter-spacing:1px;padding:7px 2px}.week-toggle button{padding:8px 12px;font-size:15px;letter-spacing:2px}}

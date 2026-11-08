@@ -10,7 +10,7 @@
  #schedule .sday{background:#f5e8e5;border-radius:12px;padding:12px}
  #schedule .sday h3{margin:0 0 10px;font:600 17px Georgia;display:flex;justify-content:space-between;align-items:baseline}
  #schedule .sday h3 small{font:12px Arial;color:#806c77}
- #schedule .sslot{background:#fff;border:1px solid #e4d4dc;border-radius:9px;padding:10px 12px;margin-bottom:8px}
+ #schedule .sslot{background:#fff;border:0;box-shadow:0 2px 8px rgba(52,33,44,.06);border-radius:9px;padding:10px 12px;margin-bottom:8px}
  #schedule .sslot .t{font-weight:bold;font-size:13px;color:#34212c;display:flex;justify-content:space-between;gap:8px;align-items:center}
  #schedule .sslot .who{margin-top:6px;font-size:14px;line-height:1.5;color:#34212c}
  #schedule .sslot .who small{display:block;color:#806c77;font-size:12px}

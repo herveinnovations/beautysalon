@@ -6,7 +6,7 @@
   wide:{ratio:'26/10',radius:'8px',label:'Booking photo'},
   reel:{ratio:'9/16',radius:'70px 70px 10px 10px',label:'Gallery reel'},
   card:{ratio:'3/2',radius:'8px',label:'Treatment card'}};
- const css=`.focus-pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start;background:#fff;border:1px solid #e4d4dc;border-radius:12px;padding:12px;margin:8px 0 18px}
+ const css=`.focus-pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start;background:#fff;border:0;box-shadow:0 6px 18px rgba(52,33,44,.07);border-radius:12px;padding:12px;margin:8px 0 18px}
  .focus-pick .fp-wrap{text-align:center;background:#f5e8e5;border-radius:8px;padding:6px}
  .focus-pick .fp-full{position:relative;display:inline-block;cursor:crosshair;touch-action:none;user-select:none;line-height:0;max-width:100%}
  .focus-pick .fp-full img{display:block;max-width:100% !important;max-height:260px !important;width:auto !important;height:auto !important;margin:0 !important;pointer-events:none;border-radius:4px}

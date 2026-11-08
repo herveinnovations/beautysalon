@@ -112,7 +112,7 @@ dialog .btn { max-width: 100%; white-space: normal; }
 
 /* Smooth refresh: the page waits for your real content, then fades in once */
 html.content-loading main,html.content-loading footer,html.content-loading .mobile-bar{opacity:0}
-main,footer,.mobile-bar{transition:opacity .35s ease}
+main,footer{transition:opacity .35s ease}.mobile-bar{transition:opacity .35s ease,transform .3s ease}
 html.content-loading body::after{content:"";position:fixed;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #eadce2;border-top-color:#723a50;opacity:0;animation:mw-spin .8s linear infinite,mw-show .2s .5s forwards;z-index:50}
 @keyframes mw-spin{to{transform:rotate(360deg)}}@keyframes mw-show{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){main,footer,.mobile-bar{transition:none}}
@@ -120,3 +120,22 @@ html.content-loading body::after{content:"";position:fixed;left:50%;top:50%;widt
 /* Booking photo shape (chosen in the admin) */
 .visit-photo.shape-full{height:auto;width:auto;max-width:100%;max-height:85vh;margin-left:auto;margin-right:auto;object-fit:contain}
 .visit-photo.shape-tall{height:auto;width:100%;aspect-ratio:4/5;max-height:640px;object-fit:cover}
+
+/* Smooth look: no outline borders, soft fills and gentle shadows instead */
+.stamp,.filter,.card,.add,.find-us,.social-row a,#download,.mobile-bar,.reel-nav button,.avail-picked,input,select,textarea,.price-row .book{border:0!important}
+.values,.hours,.hours div,.list-row,.footer-bottom{border:0!important}
+.textlink{border:0!important;font-weight:600}
+.card{box-shadow:0 10px 30px rgba(52,33,44,.07)!important;border-radius:16px}
+.stamp{background:#fff!important;box-shadow:0 8px 22px rgba(52,33,44,.12)}
+.filter{background:#f4ebe8!important;color:#6d5562!important}
+.filter.active,.filter[aria-pressed=true]{background:var(--green)!important;color:#fff!important}
+.price-row .book{background:#f4e6eb!important;color:var(--green)!important;padding:9px 18px!important}
+.price-row .book:hover{background:var(--green)!important;color:#fff!important}
+input,select,textarea{background:#fff!important;border-radius:10px!important;box-shadow:0 1px 3px rgba(52,33,44,.06)}
+input:focus,select:focus,textarea:focus{outline:0;box-shadow:0 0 0 3px rgba(114,58,80,.18)!important;background:#fff!important}
+.find-us{box-shadow:0 8px 24px rgba(52,33,44,.06)}
+.social-row a,#download{background:#fff!important;color:var(--green);box-shadow:0 2px 8px rgba(52,33,44,.06)}
+.reel-nav button{background:#f4ebe8!important;box-shadow:0 4px 12px rgba(52,33,44,.08)}
+.avail-picked{background:#f4e6eb!important}
+.mobile-bar{box-shadow:0 10px 30px rgba(52,33,44,.16)!important}
+.hours div{padding-top:7px;padding-bottom:7px}

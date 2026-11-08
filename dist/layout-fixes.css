@@ -104,8 +104,15 @@ dialog .btn { max-width: 100%; white-space: normal; }
 
 /* Editable photos wait for the published content, so an old photo never flashes on refresh */
 .hero-image img,.story-img img,.visit-photo,#looks .gallery{transition:opacity .35s ease}
-.content-loading .hero-image img,.content-loading .story-img img,.content-loading .visit-photo,.content-loading #looks .gallery{opacity:0}
+
 
 /* Treatment card videos */
 .photo.card-video{position:relative;cursor:pointer}.photo.card-video video{background:#f5e8e5}.card-video .reel-play{position:absolute;z-index:2;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,250,247,.92);color:#723a50;display:flex;align-items:center;justify-content:center;padding-left:3px;box-sizing:border-box;font-size:15px;box-shadow:0 6px 18px rgba(52,33,44,.25);opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s;pointer-events:none}
 .card-video.paused .reel-play{opacity:1;transform:scale(1)}
+
+/* Smooth refresh: the page waits for your real content, then fades in once */
+html.content-loading main,html.content-loading footer,html.content-loading .mobile-bar{opacity:0}
+main,footer,.mobile-bar{transition:opacity .35s ease}
+html.content-loading body::after{content:"";position:fixed;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #eadce2;border-top-color:#723a50;opacity:0;animation:mw-spin .8s linear infinite,mw-show .2s .5s forwards;z-index:50}
+@keyframes mw-spin{to{transform:rotate(360deg)}}@keyframes mw-show{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){main,footer,.mobile-bar{transition:none}}

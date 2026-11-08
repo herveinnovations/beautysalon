@@ -129,8 +129,8 @@ html.content-loading body::after{content:"";position:fixed;left:50%;top:50%;widt
 .stamp{background:#fff!important;box-shadow:0 8px 22px rgba(52,33,44,.12)}
 .filter{background:#f4ebe8!important;color:#6d5562!important}
 .filter.active,.filter[aria-pressed=true]{background:var(--green)!important;color:#fff!important}
-.price-row .book{background:#f4e6eb!important;color:var(--green)!important;padding:9px 18px!important}
-.price-row .book:hover{background:var(--green)!important;color:#fff!important}
+.price-row .book{background:#34212c!important;color:#fbe9e4!important;padding:9px 18px!important;box-shadow:0 4px 12px rgba(52,33,44,.25)}
+.price-row .book:hover,.price-row .book:focus-visible{background:#4a2f3e!important;color:#fff!important}
 input,select,textarea{background:#fff!important;border-radius:10px!important;box-shadow:0 1px 3px rgba(52,33,44,.06)}
 input:focus,select:focus,textarea:focus{outline:0;box-shadow:0 0 0 3px rgba(114,58,80,.18)!important;background:#fff!important}
 .find-us{box-shadow:0 8px 24px rgba(52,33,44,.06)}

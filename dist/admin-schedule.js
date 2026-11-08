@@ -1,4 +1,4 @@
-// "Schedule" tab: the week slot by slot — who booked, status, and adding studio bookings (WhatsApp, Instagram, walk-in).
+// "Schedule" tab: the week slot by slot - who booked, status, and adding studio bookings (WhatsApp, Instagram, walk-in).
 (()=>{
  const TZ='Africa/Lusaka',DEFAULT_SLOTS='09:00, 10:30, 12:00, 13:30, 15:00',DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
  const tab=document.createElement('button');tab.dataset.tab='schedule';tab.textContent='Schedule';tab.setAttribute('aria-pressed','false');

@@ -11,6 +11,6 @@
  const preferences=document.createElement('button');preferences.textContent='Statistics preferences';preferences.type='button';preferences.style='background:none;border:0;color:inherit;cursor:pointer;padding:0;font-size:10px;text-decoration:underline';preferences.onclick=()=>document.body.append(box);(document.querySelector('.footer-bottom>span:first-child')||document.querySelector('footer'))?.append(document.createTextNode(' · '),preferences);
  if(!choice&&navigator.doNotTrack!=='1'&&!navigator.globalPrivacyControl)document.body.append(box);start();
  document.querySelector('#booking')?.addEventListener('submit',()=>{if(document.querySelector('#booking').checkValidity())window.bloomTrack('booking_preview')});
- document.querySelector('#service')?.addEventListener('change',e=>window.bloomTrack('treatment',e.target.selectedOptions[0]?.textContent.split(' — ')[0]));
+ document.querySelector('#service')?.addEventListener('change',e=>window.bloomTrack('treatment',e.target.selectedOptions[0]?.textContent.replace(/ - [^-]*$/,'')));
  document.addEventListener('click',e=>{const a=e.target.closest('a');if(a?.href.startsWith('https://wa.me/'))window.bloomTrack('whatsapp')});
 })();
